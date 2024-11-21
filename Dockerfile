@@ -8,7 +8,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt-get update && \
+    apt-get install -y \
     git \
     wget \
     m4 \
@@ -18,7 +21,6 @@ RUN apt-get update && apt-get install -y \
     autoconf \
     libtool \
     texlive-latex-base \
-    software-properties-common \
     python3.8 \
     python3.8-dev \
     python3-pip \
