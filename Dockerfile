@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
     wget \
     m4 \
     build-essential \
-    gcc \
-    g++ \
+    gcc-11 \
+    g++-11 \
     autoconf \
     libtool \
     texlive-latex-base \
@@ -22,7 +22,24 @@ RUN apt-get update && apt-get install -y \
     python3.8 \
     python3.8-dev \
     python3-pip \
+    gnupg2 \
+    curl \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100 \
     && rm -rf /var/lib/apt/lists/*
+
+# Install CUDA toolkit 11.3
+RUN wget https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda_11.3.1_465.19.01_linux.run && \
+    chmod +x cuda_11.3.1_465.19.01_linux.run && \
+    ./cuda_11.3.1_465.19.01_linux.run --toolkit --silent --override && \
+    rm cuda_11.3.1_465.19.01_linux.run
+
+# Update CUDA environment variables to match 11.3
+ENV PATH=/usr/local/cuda-11.3/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64:${LD_LIBRARY_PATH}
+ENV CUDA_HOME=/usr/local/cuda-11.3
+ENV CUDA_PATH=/usr/local/cuda-11.3
+ENV CUDA_TOOLKIT_ROOT=/usr/local/cuda-11.3
 
 # Set Python 3.8 as default
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1 \
