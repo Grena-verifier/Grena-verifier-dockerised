@@ -1,5 +1,5 @@
-# Use Ubuntu 20.04 as base image
-FROM ubuntu:20.04
+# Use Ubuntu 22.04 as base image
+FROM ubuntu:22.04
 
 # Avoid timezone prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,6 +10,7 @@ WORKDIR /app
 # Install system dependencies
 RUN apt-get update && apt-get install -y software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y \
     git \
@@ -23,6 +24,7 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     texlive-latex-base \
     python3.8 \
     python3.8-dev \
+    python3.8-distutils \
     python3-pip \
     gnupg2 \
     curl \
