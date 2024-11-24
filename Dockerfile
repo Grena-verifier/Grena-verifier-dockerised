@@ -17,8 +17,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     wget \
     m4 \
     build-essential \
-    gcc-11 \
-    g++-11 \
+    gcc-9 \
+    g++-9 \
     autoconf \
     libtool \
     texlive-latex-base \
@@ -28,8 +28,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     python3-pip \
     gnupg2 \
     curl \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install CUDA toolkit 11.3
