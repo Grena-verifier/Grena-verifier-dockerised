@@ -17,6 +17,9 @@ if [ ! -d "/app/Grena-verifier" ] || [ -z "$(ls -A /app/Grena-verifier 2>/dev/nu
     pip3 install --upgrade pip
     pip3 install -r requirements.txt
 
+    # Download all the neural-network models
+    bash download_models.sh
+
     # Source Gurobi setup
     echo "source /app/Grena-verifier/gurobi_setup_path.sh" >> ~/.bashrc
 fi
