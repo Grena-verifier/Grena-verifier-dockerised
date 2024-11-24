@@ -55,15 +55,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.19.7/cmake-3.19.7
 # Set working directory
 WORKDIR /app
 
-# Set environment variables for CUDA support
-ENV USE_CUDA=1
-
-# Setup Gurobi paths (these will be used after ERAN is cloned)
-ENV GUROBI_HOME=/app/ERAN/gurobi912/linux64
-ENV PATH="${PATH}:/usr/lib:${GUROBI_HOME}/bin"
-ENV CPATH="${CPATH}:${GUROBI_HOME}/include"
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib:${GUROBI_HOME}/lib
-
 # Add entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
