@@ -5,7 +5,7 @@ cd "$script_dir"
 
 
 IMAGE_NAME="eran-env"
-CONTAINER_NAME="eran-container"  # Give the container a name for easier management
+CONTAINER_NAME="eran-container"
 
 # Create app directory if it doesn't exist
 if [ ! -d "app" ]; then
