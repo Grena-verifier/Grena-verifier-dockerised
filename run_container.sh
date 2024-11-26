@@ -3,6 +3,40 @@ set -e
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "$script_dir"
 
+# Add this function near the top of the script, after the cd "$script_dir" line
+print_usage() {
+    echo "Usage: $0 [OPTIONS]"
+    echo "Options:"
+    echo "  -g, --gurobi-license-path PATH    Path to Gurobi license file"
+    echo "  -h, --help                        Display this help message"
+    exit 1
+}
+
+# Replace the existing argument parsing section with this:
+GUROBI_LICENSE_PATH=""
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -g|--gurobi-license-path)
+            if [[ -n "$2" ]]; then
+                GUROBI_LICENSE_PATH="$2"
+                shift 2
+            else
+                echo "Error: Argument for $1 is missing" >&2
+                print_usage
+            fi
+            ;;
+        -h|--help)
+            print_usage
+            ;;
+        *)
+            echo "Error: Unknown parameter $1" >&2
+            print_usage
+            ;;
+    esac
+done
+
 IMAGE_NAME="eran-env"
 CONTAINER_NAME="eran-container"
 
@@ -18,12 +52,12 @@ if ! docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
     docker build -t $IMAGE_NAME .
 else
     # Check if Dockerfile has changed since last build
-    DOCKERFILE_MODIFIED=$(stat -f %m Dockerfile 2>/dev/null || stat -c %Y Dockerfile)
+    DOCKERFILE_MODIFIED=$(stat -c %Y Dockerfile)
 
     # Get the image creation timestamp
     IMAGE_CREATED=$(docker inspect -f '{{.Created}}' $IMAGE_NAME | xargs date +%s -d)
 
-    if [ $DOCKERFILE_MODIFIED -gt $IMAGE_CREATED ]; then
+    if [ "$DOCKERFILE_MODIFIED" -gt "$IMAGE_CREATED" ]; then
         echo "Dockerfile has been modified. Rebuilding..."
         docker build -t $IMAGE_NAME .
     else
@@ -42,6 +76,47 @@ if docker ps -a --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
         docker start -i $CONTAINER_NAME
     fi
 else
+    # Function to validate Gurobi license path
+    validate_license_path() {
+        local license_path="$1"
+        # Expand the path if it uses ~
+        license_path="${license_path/#\~/$HOME}"
+        if [ -f "$license_path" ]; then
+            echo "$license_path"
+            return 0
+        fi
+        return 1
+    }
+
+    # If license path was provided as argument, validate it
+    if [ -n "$GUROBI_LICENSE_PATH" ]; then
+        if ! VALIDATED_PATH=$(validate_license_path "$GUROBI_LICENSE_PATH"); then
+            echo "Error: File not found at $GUROBI_LICENSE_PATH"
+            echo "Falling back to interactive prompt..."
+            GUROBI_LICENSE_PATH=""
+        else
+            GUROBI_LICENSE_PATH="$VALIDATED_PATH"
+        fi
+    fi
+
+    # If no valid license path yet, prompt for it
+    while [ -z "$GUROBI_LICENSE_PATH" ]; do
+        read -p "Please enter the path to your Gurobi license file (e.g., ~/.gurobi/gurobi.lic): " input_path
+        if VALIDATED_PATH=$(validate_license_path "$input_path"); then
+            GUROBI_LICENSE_PATH="$VALIDATED_PATH"
+            break
+        else
+            echo "Error: File not found at $input_path"
+            echo "Please enter a valid path"
+        fi
+    done
+
     echo "Creating and starting new container..."
-    docker run -it --name $CONTAINER_NAME --gpus all -v "$(pwd)/app:/app" $IMAGE_NAME /bin/bash
+    docker run -it \
+        --name $CONTAINER_NAME \
+        --gpus all \
+        -v "$(pwd)/app:/app" \
+        -v "$GUROBI_LICENSE_PATH:/opt/gurobi/gurobi.lic" \
+        -e GRB_LICENSE_FILE=/opt/gurobi/gurobi.lic \
+        $IMAGE_NAME /bin/bash
 fi
