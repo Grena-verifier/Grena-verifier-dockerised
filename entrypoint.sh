@@ -6,6 +6,7 @@ if [ ! -d "/app/Grena-verifier" ] || [ -z "$(ls -A /app/Grena-verifier 2>/dev/nu
     git clone https://github.com/Grena-verifier/Grena-verifier.git /app/Grena-verifier
 
     cd /app/Grena-verifier
+    git submodule update --init --recursive
 
     # Run installation script with CUDA support
     echo "Running Grena-verifier installation script..."
