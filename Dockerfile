@@ -52,6 +52,39 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.19.7/cmake-3.19.7
     && bash ./cmake-3.19.7-Linux-x86_64.sh --skip-license --prefix=/usr \
     && rm cmake-3.19.7-Linux-x86_64.sh
 
+# Install GMP
+RUN wget https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz && \
+    tar -xvf gmp-6.1.2.tar.xz && \
+    cd gmp-6.1.2 && \
+    ./configure --enable-cxx && \
+    make && \
+    make install && \
+    cd .. && \
+    rm gmp-6.1.2.tar.xz
+
+# Install MPFR
+RUN wget https://files.sri.inf.ethz.ch/eran/mpfr/mpfr-4.1.0.tar.xz && \
+    tar -xvf mpfr-4.1.0.tar.xz && \
+    cd mpfr-4.1.0 && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && \
+    rm mpfr-4.1.0.tar.xz
+
+# Install CDDlib
+RUN wget https://github.com/cddlib/cddlib/releases/download/0.94m/cddlib-0.94m.tar.gz && \
+    tar zxf cddlib-0.94m.tar.gz && \
+    cd cddlib-0.94m && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && \
+    rm cddlib-0.94m.tar.gz
+
+# Update the library cache
+RUN ldconfig
+
 # Set working directory
 WORKDIR /app
 
