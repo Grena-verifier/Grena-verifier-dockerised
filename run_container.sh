@@ -3,7 +3,6 @@ set -e
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "$script_dir"
 
-
 IMAGE_NAME="eran-env"
 CONTAINER_NAME="eran-container"
 
@@ -20,10 +19,10 @@ if ! docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
 else
     # Check if Dockerfile has changed since last build
     DOCKERFILE_MODIFIED=$(stat -f %m Dockerfile 2>/dev/null || stat -c %Y Dockerfile)
-    
+
     # Get the image creation timestamp
     IMAGE_CREATED=$(docker inspect -f '{{.Created}}' $IMAGE_NAME | xargs date +%s -d)
-    
+
     if [ $DOCKERFILE_MODIFIED -gt $IMAGE_CREATED ]; then
         echo "Dockerfile has been modified. Rebuilding..."
         docker build -t $IMAGE_NAME .
