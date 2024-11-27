@@ -110,7 +110,12 @@ else
     done
 
     echo "Creating and starting new container..."
+
+    # The `--privileged --cgroupns=host` args are to work around the Gurobi error that occurs from
+    # using Gurobi version <= 9.5.0 with WLS license in a Docker container.
+    # Source: https://support.gurobi.com/hc/en-us/articles/4416277022353-Error-10024-Web-license-service-only-available-for-container-environments
     docker run -it \
+        --privileged --cgroupns=host \
         --name $CONTAINER_NAME \
         --gpus all \
         -v "$(pwd)/app:/app" \
