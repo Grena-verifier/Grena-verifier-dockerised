@@ -8,6 +8,7 @@ if [ -f "$INIT_FLAG_FILE" ] \
     && ([ -d "/app/Grena-verifier" ] && [ ! -z "$(ls -A /app/Grena-verifier 2>/dev/null)" ])
 then
     echo "Container already initialized, skipping container initialization..."
+    cd /app/Grena-verifier
     exec "$@"
     exit 0
 fi
