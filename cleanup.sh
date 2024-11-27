@@ -7,6 +7,22 @@ IMAGE_NAME="eran-env"
 CONTAINER_NAME="eran-container"
 APP_DIR="$script_dir/app"
 
+# Check if user ran this script with sudo/root permission
+if [ "$EUID" -ne 0 ]; then
+    echo "WARNING: Not running with sudo/root permission."
+    read -p "You may encounter problems deleting the mounted dir at $APP_DIR. Continue? (Y/N) " -n 1 -r
+    echo    # Move to a new line
+    while ! [[ $REPLY =~ ^[YyNn]$ ]]; do
+        read -p "Please enter Y or N: " -n 1 -r
+        echo
+    done
+
+    if [[ $REPLY =~ ^[Nn]$ ]]; then
+        echo "Operation cancelled."
+        exit 1
+    fi
+fi
+
 # Print what will be deleted
 echo "The following items will be deleted:"
 echo "-----------------------------------"
