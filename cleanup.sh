@@ -3,8 +3,8 @@ set -e
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "$script_dir"
 
-IMAGE_NAME="eran-env"
-CONTAINER_NAME="eran-container"
+IMAGE_NAME="grena-image"
+CONTAINER_NAME="grena-container"
 APP_DIR="$script_dir/app"
 
 # Check if user ran this script with sudo/root permission

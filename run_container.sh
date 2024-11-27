@@ -35,8 +35,8 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-IMAGE_NAME="eran-env"
-CONTAINER_NAME="eran-container"
+IMAGE_NAME="grena-image"
+CONTAINER_NAME="grena-container"
 
 # Create app directory if it doesn't exist
 if [ ! -d "app" ]; then
