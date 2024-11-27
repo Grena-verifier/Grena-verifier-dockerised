@@ -16,8 +16,12 @@ echo "Directory: $APP_DIR"
 echo "-----------------------------------"
 
 # Ask for confirmation
-read -p "Are you sure you want to proceed? (y/N) " -n 1 -r
+read -p "Are you sure you want to proceed? (Y/N) " -n 1 -r
 echo    # Move to a new line
+while ! [[ $REPLY =~ ^[YyNn]$ ]]; do
+    read -p "Please enter Y or N: " -n 1 -r
+    echo
+done
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
