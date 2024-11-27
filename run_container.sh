@@ -3,7 +3,6 @@ set -e
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 cd "$script_dir"
 
-# Add this function near the top of the script, after the cd "$script_dir" line
 print_usage() {
     echo "Usage: $0 [OPTIONS]"
     echo "Options:"
@@ -12,7 +11,6 @@ print_usage() {
     exit 1
 }
 
-# Replace the existing argument parsing section with this:
 GUROBI_LICENSE_PATH=""
 
 # Parse command line arguments
