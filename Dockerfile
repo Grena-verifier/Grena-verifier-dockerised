@@ -66,9 +66,9 @@ RUN wget https://raw.githubusercontent.com/Grena-verifier/Grena-verifier/master/
 WORKDIR /app
 
 # Add entrypoint script
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY .docker-entrypoint.sh /.docker-entrypoint.sh
+RUN chmod +x /.docker-entrypoint.sh
 
 # Set entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/.docker-entrypoint.sh"]
 CMD ["/bin/bash"]
