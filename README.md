@@ -17,24 +17,10 @@ Ensure you have the following requirements:
 
 ### Installing NVIDIA Container Toolkit
 
-To enable GPU support with Docker containers, install the NVIDIA Container Toolkit by running these commands:
+To enable GPU support with Docker containers, the NVIDIA Container Toolkit needs to be installed. Follow the steps at: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt
 
-> _Steps taken from: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt_
-
+Then restart the Docker daemon:
 ```bash
-# Add NVIDIA package repositories
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-# Update package listing
-sudo apt-get update
-
-# Install nvidia-container-toolkit
-sudo apt-get install -y nvidia-container-toolkit
-
-# Restart Docker daemon
 sudo systemctl restart docker
 ```
 
@@ -63,6 +49,18 @@ The `run_container.sh` will perform all the setup needed _(eg. build Docker imag
 bash run_container.sh -g /path/to/wls/gurobi.lic
 # OR
 bash run_container.sh  # will prompted for the license path
+```
+
+The script will mount the GRENA-verifier repo at the `app/` directory:
+
+```
+.
+├── app
+│   └── Grena-verifier  <---
+├── Dockerfile
+├── README.md
+├── run_container.sh
+└── cleanup.sh
 ```
 
 #### Troubleshooting
