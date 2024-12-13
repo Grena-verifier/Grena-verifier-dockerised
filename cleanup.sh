@@ -10,11 +10,9 @@ APP_DIR="$script_dir/app"
 # Check if user ran this script with sudo/root permission
 if [ "$EUID" -ne 0 ]; then
     echo "WARNING: Not running with sudo/root permission."
-    read -p "You may encounter problems deleting the mounted dir at $APP_DIR. Continue? (Y/N) " -n 1 -r
-    echo    # Move to a new line
+    read -p "You may encounter problems deleting the mounted dir at $APP_DIR. Continue? (Y/N) " -r
     while ! [[ $REPLY =~ ^[YyNn]$ ]]; do
-        read -p "Please enter Y or N: " -n 1 -r
-        echo
+        read -p "Please enter Y or N: " -r
     done
 
     if [[ $REPLY =~ ^[Nn]$ ]]; then
@@ -32,11 +30,9 @@ echo "Directory: $APP_DIR"
 echo "-----------------------------------"
 
 # Ask for confirmation
-read -p "Are you sure you want to proceed? (Y/N) " -n 1 -r
-echo    # Move to a new line
+read -p "Are you sure you want to proceed? (Y/N) " -r
 while ! [[ $REPLY =~ ^[YyNn]$ ]]; do
-    read -p "Please enter Y or N: " -n 1 -r
-    echo
+    read -p "Please enter Y or N: " -r
 done
 
 if [[ $REPLY =~ ^[Nn]$ ]]; then
@@ -70,11 +66,9 @@ else
 fi
 
 # Ask to remove unused Docker build cache
-read -p "Do you want to remove ALL dangling Docker build cache as well? (Y/N) " -n 1 -r
-echo    # Move to a new line
+read -p "Do you want to remove ALL dangling Docker build cache as well? (Y/N) " -r
 while ! [[ $REPLY =~ ^[YyNn]$ ]]; do
-    read -p "Please enter Y or N: " -n 1 -r
-    echo
+    read -p "Please enter Y or N: " -r
 done
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
