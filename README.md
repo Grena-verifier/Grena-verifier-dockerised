@@ -1,6 +1,6 @@
 # GRENA-verifier dockerised
 
-Dockerised implementation of GRENA-verifier.
+Dockerised implementation of [GRENA-verifier](https://github.com/Grena-verifier/Grena-verifier).
 
 <br>
 
@@ -51,7 +51,7 @@ bash run_container.sh -g /path/to/wls/gurobi.lic
 bash run_container.sh  # will prompted for the license path
 ```
 
-The script will mount the GRENA-verifier repo at the `app/` directory:
+The script will clone _(if needed)_ and mount the GRENA-verifier repo at the `app/` directory:
 
 ```
 .
