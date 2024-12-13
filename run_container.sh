@@ -99,7 +99,7 @@ else
 
     # If no valid license path yet, prompt for it
     while [ -z "$GUROBI_LICENSE_PATH" ]; do
-        read -p "Please enter the path to your Gurobi license file (e.g., ~/.gurobi/gurobi.lic): " input_path
+        read -r -p "Please enter the path to your Gurobi license file (e.g., ~/.gurobi/gurobi.lic): " input_path
         if VALIDATED_PATH=$(validate_license_path "$input_path"); then
             GUROBI_LICENSE_PATH="$VALIDATED_PATH"
             break
