@@ -1,6 +1,9 @@
 # Use Ubuntu 22.04 as base image
 FROM ubuntu:22.04
 
+# To ensuring deterministic GPU computations for reproducibility
+ENV CUBLAS_WORKSPACE_CONFIG=:4096:8
+
 # Avoid timezone prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
