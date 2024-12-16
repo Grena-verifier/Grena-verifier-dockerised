@@ -44,7 +44,9 @@ The repository provides two main scripts:
 
 ### Running the Docker Container
 
-The `run_container.sh` will perform all the setup needed _(eg. build Docker image, start container)_.
+The `run_container.sh` will perform all the setup needed _(eg. build Docker image, install all dependencies, download all models, etc)_.
+
+You'll need to provide it the path to your WLS Gurobi license file either with the `-g` / `--gurobi-license-path` flag, or simply run the script and it'll prompt for the path when needed.
 
 ```bash
 bash run_container.sh -g /path/to/wls/gurobi.lic
@@ -64,6 +66,14 @@ The script will clone _(if needed)_ and mount the GRENA-verifier repo at the `ap
 └── cleanup.sh
 ```
 
+and it will enter the Docker container in the `Grena-verifer` repo directory. You should see something like this:
+
+```
+root@a352bcaa6b22:/app/Grena-verifier#
+```
+
+<br>
+
 #### Troubleshooting
 
 If you get this error:
@@ -77,6 +87,16 @@ Run these commands to give docker permissions to your user account:
 ```bash
 sudo usermod -aG docker $USER
 newgrp docker
+```
+
+<br>
+
+#### Re-running / Re-entering the Docker Container
+
+If you've exited or deleted the container, you may re-run / re-enter the container by:
+
+```bash
+bash run_container.sh
 ```
 
 <br>
