@@ -20,6 +20,7 @@ Ensure you have the following requirements:
 To enable GPU support with Docker containers, the NVIDIA Container Toolkit needs to be installed. Follow the steps at: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt
 
 Then restart the Docker daemon:
+
 ```bash
 sudo systemctl restart docker
 ```
@@ -41,7 +42,7 @@ The repository provides two main scripts:
 
 <br>
 
-### Running the Container
+### Running the Docker Container
 
 The `run_container.sh` will perform all the setup needed _(eg. build Docker image, start container)_.
 
