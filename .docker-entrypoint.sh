@@ -32,7 +32,7 @@ cd /app/Grena-verifier
 # Run installation script with CUDA support
 echo "Running Grena-verifier installation script..."
 chmod +x install.sh
-./install.sh --use-cuda
+./install.sh
 
 # Create flag file to indicate that this container has been initialized
 echo "This file is to indicate that this Docker container has already been initialized." > "$INIT_FLAG_FILE"
