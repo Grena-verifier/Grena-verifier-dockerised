@@ -9,9 +9,9 @@ Dockerised implementation of [GRENA-verifier](https://github.com/Grena-verifier/
 Ensure you have the following requirements:
 
 1. Docker installed on your system
-2. NVIDIA GPU(s) available on your machine
-3. NVIDIA Container Toolkit installed _(instructions below)_
-4. A Gurobi Web License Service (WLS) license file
+1. NVIDIA GPU(s) available on your machine
+1. NVIDIA Container Toolkit installed _(instructions below)_
+1. A Gurobi Web License Service (WLS) license file
 
 <br>
 
@@ -29,7 +29,7 @@ sudo systemctl restart docker
 
 ### Obtaining Gurobi License
 
-You need to obtain a Web License Service (WLS) Gurobi license file `gurobi.lic` before running the container.
+You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` before running the container.
 
 <br>
 
@@ -46,7 +46,7 @@ The repository provides two main scripts:
 
 The `run_container.sh` will perform all the setup needed _(eg. build Docker image, install all dependencies, download all models, etc)_.
 
-You'll need to provide it the path to your WLS Gurobi license file either with the `-g` / `--gurobi-license-path` flag, or simply run the script and it'll prompt for the path when needed.
+You'll need to provide it the path to your Gurobi WLS license file either with the `-g` / `--gurobi-license-path` flag, or simply run the script and it'll prompt for the path when needed.
 
 ```bash
 bash run_container.sh -g /path/to/wls/gurobi.lic
