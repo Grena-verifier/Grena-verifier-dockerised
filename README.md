@@ -12,6 +12,7 @@ Ensure you have the following requirements:
 1. NVIDIA GPU(s) available on your machine
 1. NVIDIA Container Toolkit installed _(instructions below)_
 1. A Gurobi Web License Service (WLS) license file
+1. Internet access _(for Gurobi WLS license to authenticate)_
 
 <br>
 
@@ -30,6 +31,8 @@ sudo systemctl restart docker
 ### Obtaining Gurobi License
 
 You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` before running the container.
+
+> _**:warning: NOTE:** WLS license needs internet access to authenticate._
 
 <br>
 
