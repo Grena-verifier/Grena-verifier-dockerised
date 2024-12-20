@@ -32,7 +32,7 @@ sudo systemctl restart docker
 
 You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` before running the container.
 
-> _**:warning: NOTE:** WLS license needs internet access to authenticate._
+> :bulb: _**NOTE:** WLS license needs internet access to authenticate._
 
 <br>
 
@@ -108,7 +108,7 @@ bash run_container.sh
 
 All the models are downloaded to the `/model` directory by the `run_container.sh` script. If the download somehow failed, try running the `/Grena-verifier/download_model.sh` script.
 
-> :warning: _**NOTE:** Below is a snippet from [Grena-verifier](https://github.com/Grena-verifier/Grena-verifier)'s README. For more info, refer to our Grena-verifier's README._
+> :bulb: _**NOTE:** Below is a snippet from [Grena-verifier](https://github.com/Grena-verifier/Grena-verifier)'s README. For more info, refer to our Grena-verifier's README._
 
 <br>
 
@@ -126,7 +126,7 @@ cd experiment_scripts
 python CConvBig_verify.py   # for CIFAR10 ConvBig verification exp.
 ```
 
-> :warning: _**NOTE:** The scripts will save all console logs to `terminal.log` in the results directory instead of printing to terminal._
+> :bulb: _**NOTE:** The scripts will save all console logs to `terminal.log` in the results directory instead of printing to terminal._
 
 The experiment results will be saved to the `experiment_scripts/results/[MODEL_NAME]/[verify|bounds]/` directory:
 
