@@ -4,7 +4,7 @@ Dockerised implementation of [GRENA-verifier](https://github.com/Grena-verifier/
 
 <br>
 
-## Prerequisites
+# Prerequisites
 
 Ensure you have the following requirements:
 
@@ -16,7 +16,7 @@ Ensure you have the following requirements:
 
 <br>
 
-### Installing NVIDIA Container Toolkit
+## Installing NVIDIA Container Toolkit
 
 To enable GPU support with Docker containers, the NVIDIA Container Toolkit needs to be installed. Follow the steps at: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt
 
@@ -28,7 +28,7 @@ sudo systemctl restart docker
 
 <br>
 
-### Obtaining Gurobi License
+## Obtaining Gurobi License
 
 You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` before running the container.
 
@@ -36,7 +36,7 @@ You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` 
 
 <br>
 
-## Usage
+# Usage
 
 The repository provides two main scripts:
 
@@ -45,7 +45,7 @@ The repository provides two main scripts:
 
 <br>
 
-### Running the Docker Container
+## Running the Docker Container
 
 The `run_container.sh` will perform all the setup needed _(eg. build Docker image, install all dependencies, download all models, etc)_.
 
@@ -77,7 +77,7 @@ root@a352bcaa6b22:/app/Grena-verifier#
 
 <br>
 
-#### Troubleshooting
+### Troubleshooting
 
 If you get this error:
 
@@ -94,7 +94,7 @@ newgrp docker
 
 <br>
 
-#### Re-running / Re-entering the Docker Container
+## Re-running / Re-entering the Docker Container
 
 If you've exited or deleted the container, you may re-run / re-enter the container by:
 
@@ -104,7 +104,7 @@ bash run_container.sh
 
 <br>
 
-### Running the Experiments (in the Docker container)
+## Running the Experiments (in the Docker container)
 
 All the models are downloaded to the `/model` directory by the `run_container.sh` script. If the download somehow failed, try running the `/Grena-verifier/download_model.sh` script.
 
@@ -157,7 +157,7 @@ The main result files are:
 
 <br>
 
-### Cleaning Up
+## Cleaning Up
 
 To all resources created by Docker, run `cleanup.sh` with root privileges:
 
