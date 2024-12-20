@@ -104,6 +104,59 @@ bash run_container.sh
 
 <br>
 
+### Running the Experiments (in the Docker container)
+
+All the models are downloaded to the `/model` directory by the `run_container.sh` script. If the download somehow failed, try running the `/Grena-verifier/download_model.sh` script.
+
+> :warning: _**NOTE:** Below is a snippet from [Grena-verifier](https://github.com/Grena-verifier/Grena-verifier)'s README. For more info, refer to our Grena-verifier's README._
+
+<br>
+
+Each model has two scripts in the `/experiment_scripts` directory:
+
+-   `[C|M][MODEL_NAME]_verify.py` — Perform abstract refinement based verification on 30 selected images per model
+-   `[C|M][MODEL_NAME]_bounds.py` — Compare bounds tightening on 1 image using Gurobi vs our tailored solver
+
+Scripts for CIFAR-10 models are prefixed with `C`, MNIST are prefixed with `M`.
+
+To run any of the experiments, simply run the corresponding script with Python.
+
+```bash
+cd experiment_scripts
+python CConvBig_verify.py   # for CIFAR10 ConvBig verification exp.
+```
+
+> :warning: _**NOTE:** The scripts will save all console logs to `terminal.log` in the results directory instead of printing to terminal._
+
+The experiment results will be saved to the `experiment_scripts/results/[MODEL_NAME]/[verify|bounds]/` directory:
+
+```
+# For example:
+.
+├── tf_verify/
+├── experiment_scripts/
+│   └── results/
+|       ├── M6x256
+│       │   ├── bounds/  <---
+│       │   └── verify/  <---
+|       └── MConvSmall
+│           ├── bounds/  <---
+│           └── verify/  <---
+├── README.md
+├── download_models.sh
+├── install_libraries.sh
+├── install.sh
+└── requirements.txt
+```
+
+The main result files are:
+
+-   `bounds/RESULT_bounds_improvement_plot.jpg`
+-   `bounds/RESULT_solver_runtimes.csv`
+-   `verify/RESULT_GRENA_verification.csv`
+
+<br>
+
 ### Cleaning Up
 
 To all resources created by Docker, run `cleanup.sh` with root privileges:
