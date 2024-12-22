@@ -38,7 +38,7 @@ You need to obtain a Gurobi Web License Service (WLS) license file `gurobi.lic` 
 
 # Usage
 
-The repository provides two main scripts:
+This repository provides two main scripts:
 
 -   `run_container.sh`: Sets up and runs the GRENA-verifier container
 -   `cleanup.sh`: Removes all resources created by the container
@@ -49,7 +49,7 @@ The repository provides two main scripts:
 
 The `run_container.sh` will perform all the setup needed _(eg. build Docker image, install all dependencies, download all models, etc)_.
 
-You'll need to provide it the path to your Gurobi WLS license file either with the `-g` / `--gurobi-license-path` flag, or simply run the script and it'll prompt for the path when needed.
+You'll need to provide it the path to your Gurobi WLS license file either with the `-g` / `--gurobi-license-path` flag, or simply run the script and it will prompt you to enter the license path when needed.
 
 ```bash
 bash run_container.sh -g /path/to/wls/gurobi.lic
@@ -69,7 +69,7 @@ The script will clone _(if needed)_ and mount the GRENA-verifier repo at the `ap
 └── cleanup.sh
 ```
 
-and it will enter the Docker container in the `Grena-verifer` repo directory. You should see something like this:
+and it will enter the Docker container in the `Grena-verifier` repo directory. You should see something like this:
 
 ```
 root@a352bcaa6b22:/app/Grena-verifier#
@@ -106,7 +106,7 @@ bash run_container.sh
 
 ## Running the Experiments (in the Docker container)
 
-All the models are downloaded to the `/model` directory by the `run_container.sh` script. If the download somehow failed, try running the `/Grena-verifier/download_model.sh` script.
+All the models are downloaded to the `/Grena-verifier/model` directory by the `run_container.sh` script. If the download somehow failed, try manually running the `/Grena-verifier/download_models.sh` script.
 
 > :bulb: _**NOTE:** Below is a snippet from [Grena-verifier](https://github.com/Grena-verifier/Grena-verifier)'s README. For more info, refer to our Grena-verifier's README._
 
@@ -126,7 +126,7 @@ cd experiment_scripts
 python CConvBig_verify.py   # for CIFAR10 ConvBig verification exp.
 ```
 
-> :bulb: _**NOTE:** The scripts will save all console logs to `terminal.log` in the results directory instead of printing to terminal._
+> :bulb: _**NOTE:** The scripts will save all console logs to `terminal.log` within the corresponding model's results directory instead of printing to the terminal._
 
 The experiment results will be saved to the `experiment_scripts/results/[MODEL_NAME]/[verify|bounds]/` directory:
 
@@ -159,7 +159,7 @@ The main result files are:
 
 ## Cleaning Up
 
-To all resources created by Docker, run `cleanup.sh` with root privileges:
+To remove all resources created by Docker, run `cleanup.sh` with root privileges:
 
 ```bash
 sudo bash cleanup.sh
