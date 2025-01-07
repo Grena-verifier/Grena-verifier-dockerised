@@ -157,6 +157,14 @@ The main result files are:
 
 <br>
 
+### Experimental Results
+
+The results for our experiments can be found in our Grena-verifier repository's README under the [**Experimental Results (Unseeded)**](https://github.com/Grena-verifier/Grena-verifier/tree/master?tab=readme-ov-file#experimental-results-unseeded) section.
+
+However, for reproducibility our scripts use a seed of `42`. You can compare the results from our scripts with those in the [**Experimental Results (Seed 42)**](https://github.com/Grena-verifier/Grena-verifier/tree/master?tab=readme-ov-file#experimental-results-seed-42) section of Grena-verifier's README.
+
+<br>
+
 ## Cleaning Up
 
 To remove all resources created by Docker, run `cleanup.sh` with root privileges:
